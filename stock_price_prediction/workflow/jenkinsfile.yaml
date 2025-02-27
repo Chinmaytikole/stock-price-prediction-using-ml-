@@ -18,7 +18,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'venv\\Scripts\\python -m pip install -r requirements.txt'
+                bat 'venv\\Scripts\\python -m pip install -r stock_price_prediction/requirements.txt'
             }
         }
 
