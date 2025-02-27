@@ -10,21 +10,21 @@ pipeline {
 
         stage('Set Up Python') {
             steps {
-                sh 'python3 -m venv venv'
-                sh 'source venv/bin/activate'
-                sh 'pip install --upgrade pip'
+                bat 'python3 -m venv venv'
+                bat 'source venv/bin/activate'
+                bat 'pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Application') {
             steps {
-                sh 'python User_interface.py'
+                bat 'python User_interface.py'
             }
         }
     }
