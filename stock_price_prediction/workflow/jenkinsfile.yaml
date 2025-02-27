@@ -1,30 +1,31 @@
-name: CI Pipeline for Stock Price Prediction
+pipeline {
+    agent any
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Chinmaytikole/stock-price-prediction-using-ml-.git'
+            }
+        }
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+        stage('Set Up Python') {
+            steps {
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate'
+                sh 'pip install --upgrade pip'
+            }
+        }
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      - name: Install Dependencies
-        run: |
-          pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: Run Stock Price Predictor UI
-        run: python User_interface.py
+        stage('Run Application') {
+            steps {
+                sh 'python User_interface.py'
+            }
+        }
+    }
+}
