@@ -10,7 +10,7 @@ pipeline {
 
         stage('Set Up Python') {
             steps {
-                bat 'python3 -m venv venv'
+                bat 'python -m venv venv'
                 bat 'source venv/bin/activate'
                 bat 'pip install --upgrade pip'
             }
