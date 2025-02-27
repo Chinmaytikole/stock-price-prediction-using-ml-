@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Application') {
             steps {
-                    bat '''set STREAMLIT_ENV=dev venv\\Scripts\\python -m streamlit run stock_price_prediction/User_interface.py --server.port=8501 --server.address=0.0.0.0 --browser.gatherUsageStats=false'''
+                bat 'venv\\Scripts\\python -m streamlit run stock_price_prediction/User_interface.py --server.port=8501 --server.address=0.0.0.0 --browser.gatherUsageStats=false'
             }
         }
     }
